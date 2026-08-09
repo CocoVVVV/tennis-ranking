@@ -50,6 +50,7 @@ function computeRelations(matches, playerId) {
     id,
     winsAgainst: s.winsAgainst,
     lossesAgainst: s.lossesAgainst,
+    winRate: s.winsAgainst / (s.winsAgainst + s.lossesAgainst),
   }));
 
   return { partners, opponents };
@@ -86,13 +87,11 @@ export default function RelationsExplorer({ players, matches }) {
 
   const bestPartners = [...partners].sort((a, b) => b.winRate - a.winRate).slice(0, 3);
   const worstPartners = [...partners].sort((a, b) => a.winRate - b.winRate).slice(0, 3);
-  const mostBeaten = [...opponents]
-    .filter((o) => o.winsAgainst > 0)
-    .sort((a, b) => b.winsAgainst - a.winsAgainst)
+  const topOpponents = [...opponents]
+    .sort((a, b) => b.winRate - a.winRate || b.winsAgainst - a.winsAgainst)
     .slice(0, 3);
-  const mostLostTo = [...opponents]
-    .filter((o) => o.lossesAgainst > 0)
-    .sort((a, b) => b.lossesAgainst - a.lossesAgainst)
+  const bottomOpponents = [...opponents]
+    .sort((a, b) => a.winRate - b.winRate || b.winsAgainst - a.winsAgainst)
     .slice(0, 3);
 
   return (
@@ -135,7 +134,7 @@ export default function RelationsExplorer({ players, matches }) {
 
           <section>
             <h2 className="mb-2 text-sm font-semibold text-zinc-500">
-              🤝 페어 승률이 낮은 상대 Top 3
+              💔 페어 승률이 낮은 상대 Top 3
             </h2>
             <NameList
               items={worstPartners}
@@ -153,16 +152,17 @@ export default function RelationsExplorer({ players, matches }) {
 
           <section>
             <h2 className="mb-2 text-sm font-semibold text-zinc-500">
-              🔥 상대로 많이 이긴 사람 Top 3
+              🔥 상대 전적 상위 Top 3
             </h2>
             <NameList
-              items={mostBeaten}
-              emptyLabel="맞대결에서 이긴 적이 없습니다."
+              items={topOpponents}
+              emptyLabel="맞대결한 상대가 없습니다."
               renderLine={(item) => (
                 <span>
                   {nameById.get(item.id)}{" "}
                   <span className="text-zinc-500 tabular-nums">
-                    ({item.winsAgainst}승)
+                    ({Math.round(item.winRate * 100)}%, {item.winsAgainst}승{" "}
+                    {item.lossesAgainst}패)
                   </span>
                 </span>
               )}
@@ -171,16 +171,17 @@ export default function RelationsExplorer({ players, matches }) {
 
           <section>
             <h2 className="mb-2 text-sm font-semibold text-zinc-500">
-              😵 상대에게 많이 진 사람 Top 3
+              😵 상대 전적 하위 Top 3
             </h2>
             <NameList
-              items={mostLostTo}
-              emptyLabel="맞대결에서 진 적이 없습니다."
+              items={bottomOpponents}
+              emptyLabel="맞대결한 상대가 없습니다."
               renderLine={(item) => (
                 <span>
                   {nameById.get(item.id)}{" "}
                   <span className="text-zinc-500 tabular-nums">
-                    ({item.lossesAgainst}패)
+                    ({Math.round(item.winRate * 100)}%, {item.winsAgainst}승{" "}
+                    {item.lossesAgainst}패)
                   </span>
                 </span>
               )}

@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata = {
-  title: "테니스 클럽 랭킹",
+  title: "해마루 랭킹",
   description: "테니스 클럽 경기 결과와 Elo 랭킹",
 };
 
@@ -27,7 +27,7 @@ export default function RootLayout({ children }) {
         <header className="border-b border-zinc-200 dark:border-zinc-800">
           <nav className="mx-auto flex max-w-3xl items-center gap-6 px-4 py-4">
             <Link href="/" className="font-semibold">
-              🎾 클럽 랭킹
+              🎾 해마루 랭킹
             </Link>
             <Link href="/" className="text-sm text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-50">
               랭킹
@@ -37,6 +37,9 @@ export default function RootLayout({ children }) {
             </Link>
             <Link href="/members" className="text-sm text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-50">
               멤버 관리
+            </Link>
+            <Link href="/relations" className="text-sm text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-50">
+              관계
             </Link>
             <Link
               href="/record"

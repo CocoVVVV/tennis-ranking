@@ -51,7 +51,10 @@ export default async function RankingPage() {
                 className="border-b border-zinc-100 dark:border-zinc-900"
               >
                 <td className="py-2 pr-2 text-zinc-500">{i + 1}</td>
-                <td className="py-2 pr-2 font-medium">{p.name}</td>
+                <td className="py-2 pr-2 font-medium">
+                  {i === 0 ? "👑 " : ""}
+                  {p.name}
+                </td>
                 <td className="py-2 pr-2 text-right tabular-nums">
                   {p.rating}
                 </td>

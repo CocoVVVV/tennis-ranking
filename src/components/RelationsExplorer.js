@@ -91,7 +91,7 @@ export default function RelationsExplorer({ players, matches }) {
     .sort((a, b) => b.winRate - a.winRate || b.winsAgainst - a.winsAgainst)
     .slice(0, 3);
   const bottomOpponents = [...opponents]
-    .sort((a, b) => a.winRate - b.winRate || b.winsAgainst - a.winsAgainst)
+    .sort((a, b) => a.winRate - b.winRate || b.lossesAgainst - a.lossesAgainst)
     .slice(0, 3);
 
   return (

@@ -11,7 +11,11 @@ function ratingDelta(before, after) {
   return `${sign}${diff}`;
 }
 
-export default function MatchesList({ matches }) {
+export default function MatchesList({
+  matches,
+  deleteRpc = "delete_match",
+  editHrefBase = "/matches",
+}) {
   const router = useRouter();
   const [deletingId, setDeletingId] = useState(null);
   const [error, setError] = useState("");
@@ -22,7 +26,7 @@ export default function MatchesList({ matches }) {
     }
     setDeletingId(matchId);
     setError("");
-    const { error: rpcError } = await supabase.rpc("delete_match", {
+    const { error: rpcError } = await supabase.rpc(deleteRpc, {
       p_match_id: matchId,
     });
     setDeletingId(null);
@@ -77,7 +81,7 @@ export default function MatchesList({ matches }) {
                 )
               </div>
               <div className="mt-2 flex gap-3 text-sm">
-                <Link href={`/matches/${m.id}/edit`} className="text-zinc-600 underline hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-50">
+                <Link href={`${editHrefBase}/${m.id}/edit`} className="text-zinc-600 underline hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-50">
                   수정
                 </Link>
                 <button

@@ -42,6 +42,12 @@ export default function RootLayout({ children }) {
               멤버 관리
             </Link>
             <Link
+              href="/practice"
+              className="text-sm text-orange-600 hover:text-orange-800 dark:text-orange-400 dark:hover:text-orange-200"
+            >
+              🔶 연습경기
+            </Link>
+            <Link
               href="/record"
               className="ml-auto rounded-full bg-zinc-900 px-4 py-1.5 text-sm font-medium text-white hover:bg-zinc-700 dark:bg-white dark:text-black dark:hover:bg-zinc-200"
             >

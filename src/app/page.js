@@ -22,11 +22,18 @@ export default async function RankingPage() {
     );
   }
 
+  const ranked = players.reduce((acc, p, i) => {
+    const rank =
+      i === 0 || p.rating !== players[i - 1].rating ? i + 1 : acc[i - 1].rank;
+    acc.push({ ...p, rank });
+    return acc;
+  }, []);
+
   return (
     <div>
       <h1 className="mb-6 text-2xl font-semibold">랭킹</h1>
 
-      {players.length === 0 ? (
+      {ranked.length === 0 ? (
         <p className="text-zinc-500">
           아직 등록된 선수가 없습니다.{" "}
           <Link href="/record" className="underline">
@@ -45,14 +52,14 @@ export default async function RankingPage() {
             </tr>
           </thead>
           <tbody>
-            {players.map((p, i) => (
+            {ranked.map((p) => (
               <tr
                 key={p.id}
                 className="border-b border-zinc-100 dark:border-zinc-900"
               >
-                <td className="py-2 pr-2 text-zinc-500">{i + 1}</td>
+                <td className="py-2 pr-2 text-zinc-500">{p.rank}</td>
                 <td className="py-2 pr-2 font-medium">
-                  {i === 0 ? "👑 " : ""}
+                  {p.rank === 1 ? "👑 " : ""}
                   {p.name}
                 </td>
                 <td className="py-2 pr-2 text-right tabular-nums">

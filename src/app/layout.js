@@ -35,11 +35,11 @@ export default function RootLayout({ children }) {
             <Link href="/matches" className="text-sm text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-50">
               경기 기록
             </Link>
-            <Link href="/members" className="text-sm text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-50">
-              멤버 관리
-            </Link>
             <Link href="/relations" className="text-sm text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-50">
               관계
+            </Link>
+            <Link href="/members" className="text-sm text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-50">
+              멤버 관리
             </Link>
             <Link
               href="/record"

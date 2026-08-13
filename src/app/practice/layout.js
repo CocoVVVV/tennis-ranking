@@ -23,6 +23,12 @@ export default function PracticeLayout({ children }) {
           경기 기록
         </Link>
         <Link
+          href="/members"
+          className="text-orange-700 hover:text-orange-900 dark:text-orange-300 dark:hover:text-orange-100"
+        >
+          멤버 관리
+        </Link>
+        <Link
           href="/practice/record"
           className="ml-auto rounded-full bg-orange-500 px-4 py-1.5 text-sm font-medium text-white hover:bg-orange-600"
         >
